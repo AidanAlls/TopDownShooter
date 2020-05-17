@@ -1,0 +1,46 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Item.gd"
+}, {
+"base": "Node",
+"class": "LootGenerator",
+"language": "GDScript",
+"path": "res://LootGenerator.gd"
+}, {
+"base": "Item",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Weapon.gd"
+}, {
+"base": "Node",
+"class": "Weapon_Part",
+"language": "GDScript",
+"path": "res://Weapon_Part.gd"
+} ]
+_global_script_class_icons={
+"Item": "",
+"LootGenerator": "",
+"Weapon": "",
+"Weapon_Part": ""
+}
+
+[application]
+
+config/name="TopDownShooter"
+config/icon="res://icon.png"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

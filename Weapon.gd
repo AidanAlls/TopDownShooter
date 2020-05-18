@@ -22,10 +22,11 @@ onready var image = Sprite.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	image.translate(Vector2(0,25))
+	image.texture = load("res://Assets/Animation Sprites/Wand Use/Wand_Use-1.png")
+	image.translate(Vector2(32,0))
 	add_child(image)
 	
-	projectile_point.translate(Vector2(64,25)) # set up spawn point for projectiles
+	projectile_point.translate(Vector2(64,0)) # set up spawn point for projectiles
 	add_child(projectile_point)
 	
 	rng = RandomNumberGenerator.new()

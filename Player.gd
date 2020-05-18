@@ -1,13 +1,14 @@
 extends KinematicBody2D
 
-var max_speed = 300
+var max_speed = 250
 var ACCELERATION = 10000
 var motion = Vector2.ZERO
 var current_item = preload("res://Weapon.tscn") # this initializer is temporary
 
 func _ready():
 	var weapon = Weapon.new()
-	current_item = get_node("..").get_node("LootGenerator").generate_loot(weapon, 1)
+	#current_item = get_node("..").get_node("LootGenerator").generate_loot(weapon, 1)
+	current_item = weapon
 	add_child(current_item) #this will eventually happen on pickup of an item
 
 func _physics_process(delta):

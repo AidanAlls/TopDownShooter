@@ -4,19 +4,19 @@
 [ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right-1.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right-2.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right-3.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-1.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-2.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-3.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-4.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-2.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-3.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-1.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left-1.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left-2.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left-3.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left-4.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-2.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-1.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-3.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-1.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left-1.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left-2.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left-3.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left-4.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-1.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-2.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-3.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-4.png" type="Texture" id=17]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -25,31 +25,32 @@ animations = [ {
 "name": "Walk_Right",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 6 ) ],
 "loop": true,
-"name": "Walk_Up",
-"speed": 7.0
+"name": "Idle",
+"speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "Walk_Down",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "Walk_Left",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
-"name": "Idle",
-"speed": 5.0
+"name": "Walk_Up",
+"speed": 7.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 7.32159
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -57,7 +58,7 @@ position = Vector2( 0.321226, -0.638832 )
 scale = Vector2( 0.0274418, 0.0306748 )
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 4
+frame = 5
 playing = true
 
 [node name="Feet" type="CollisionShape2D" parent="."]

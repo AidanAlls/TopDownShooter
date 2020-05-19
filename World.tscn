@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://Assets/Tileset Sprites/Water Right Angle/Water_Right_Angle-5.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Tileset Sprites/Water Right Angle/Water_Right_Angle-6.png" type="Texture" id=26]
 [ext_resource path="res://Assets/Tileset Sprites/32-bit_Snow_Tileset.png" type="Texture" id=27]
+[ext_resource path="res://Chest.tscn" type="PackedScene" id=28]
 
 [sub_resource type="AnimatedTexture" id=1]
 frames = 6
@@ -246,3 +247,7 @@ gravity_scale = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2( -214.587, 5.59506 )
 shape = SubResource( 6 )
+
+[node name="Chest" parent="." instance=ExtResource( 28 )]
+position = Vector2( 142.759, -294.728 )
+z_index = 3

@@ -4,6 +4,7 @@ class_name Weapon
 
 var rng
 var projectile = preload("res://Projectile.tscn")
+var scale_mult = 1.6 # 1 is actual size, bigger is larger
 
 export var projectile_count = 7
 export var projectile_life = 0 # how long it's alive/range
@@ -15,23 +16,56 @@ export var energy_amount = 0 # 'clip size'
 export var energy_drain = 0 # how much used per shot
 export var energy_cooldown = 0 # how much time before it recharges
 export var energy_recharge = 0 # how quickly it recharges
-
+#children nodes
 onready var player = get_node("..")
+onready var animated_sprite = AnimatedSprite.new()
+onready var animator = SpriteFrames.new()
 onready var projectile_point = Node2D.new()
-onready var image = Sprite.new()
+#Parts
+onready var core = Weapon_Part.new()
+onready var mod1 = Weapon_Part.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	image.texture = load("res://Assets/Animation Sprites/Wand Use/Wand_Use-1.png")
-	image.translate(Vector2(32,0))
-	add_child(image)
+	add_child(core)
+	add_child(mod1)
+	setup_proj_point()
+	setup_animator()
 	
-	projectile_point.translate(Vector2(64,0)) # set up spawn point for projectiles
-	add_child(projectile_point)
-	
+	#setup rng
 	rng = RandomNumberGenerator.new()
 
+func setup_proj_point(): #sets up where the projectiles come out
+	add_child(projectile_point)
+	projectile_point.translate(Vector2(70,0)) # set up spawn point for projectiles
+
+func setup_animator():
+	add_child(animated_sprite)
+	animated_sprite.translate(Vector2(32,0)) # move it over  the length of an item
+	animated_sprite.scale = Vector2(1*scale_mult, 1*scale_mult)
+	animated_sprite.frames = animator
+	#TEMPORARY FROM HERE DOWN, this will be part of loot generation
+	animator.add_animation("Idle")
+	animator.add_frame("Idle", load("res://Assets/Animation Sprites/Wand Use/Wand_Use-1.png"), -1)
+	animated_sprite.play("Idle")
+	animator.set_animation_loop("Idle", false)
+	animated_sprite.connect("animation_finished", self, "return_idle") # makes idle the resting state
+	
+	animator.add_animation("Use")
+	animator.add_frame("Use", load("res://Assets/Animation Sprites/Wand Use/Wand_Use-1.png"), -1)
+	animator.add_frame("Use", load("res://Assets/Animation Sprites/Wand Use/Wand_Use-2.png"), -1)
+	animator.add_frame("Use", load("res://Assets/Animation Sprites/Wand Use/Wand_Use-3.png"), -1)
+	animator.add_frame("Use", load("res://Assets/Animation Sprites/Wand Use/Wand_Use-4.png"), -1)
+	animator.add_frame("Use", load("res://Assets/Animation Sprites/Wand Use/Wand_Use-5.png"), -1)
+	animator.add_frame("Use", load("res://Assets/Animation Sprites/Wand Use/Wand_Use-1.png"), -1)
+	animator.set_animation_speed("Use", 8)
+	animator.set_animation_loop("Use", false)
+
+func _process(delta):
+	pass
+
 func use():
+	animated_sprite.play("Use")
 	for i in range(projectile_count): # makes the correct number of projectiles
 		var projectile_instance = projectile.instance()
 		var rot = player.get_angle_to(get_global_mouse_position())
@@ -47,11 +81,8 @@ func use():
 	yield(get_tree().create_timer(use_rate), "timeout")
 	can_use = true # resetting to true after a period of use_rate
 
-
-
-
-
-
+func return_idle():
+	animated_sprite.play("Idle")
 
 
 

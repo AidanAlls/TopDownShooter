@@ -2,7 +2,7 @@ extends Node
 
 class_name Weapon_Part
 
-var level
+var level = 0
 var name_segment
 
 export var projectile_count_mod = 1
@@ -15,3 +15,6 @@ export var energy_amount_mod = 0 # 'clip size'
 export var energy_drain_mod = 0 # how much used per shot
 export var energy_cooldown_mod = 0 # how much time before it recharges
 export var energy_recharge_mod = 0 # how quickly it recharges
+
+func ready():
+	name_segment = ""

@@ -75,6 +75,12 @@ toggle_fullscreen={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Environment, Feet"
+2d_physics/layer_2="Player Hitbox, Player Projectiles"
+2d_physics/layer_3="Enemy Hitbox, Enemy Projectiles"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

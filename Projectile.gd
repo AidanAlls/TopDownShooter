@@ -12,7 +12,8 @@ func _ready():
 func _process(delta):
 	scale = Vector2(1*scalar, 1*scalar) # for some reason this has to be set every process?
 
-func _on_Projectile_body_entered(body):
+func explode(): # what happens when it breaks
+	print("starts exploding")
 	set_can_sleep(true)
 	set_sleeping(true)	# these two lines make sure it won't move anymore
 	rotate(-rotation)
@@ -20,3 +21,9 @@ func _on_Projectile_body_entered(body):
 	$"AnimatedSprite".play("Explosion")
 	yield($"AnimatedSprite", "animation_finished") # makes sure to wait for the animation to finish before removing
 	queue_free()
+	print("ends exploding")
+
+
+func _on_Projectile_body_entered(body):
+	print("projectile body entered")
+	explode()

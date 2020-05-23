@@ -3,4 +3,5 @@
 [ext_resource path="res://Chest.gd" type="Script" id=1]
 
 [node name="Chest" type="RigidBody2D"]
+collision_mask = 2
 script = ExtResource( 1 )

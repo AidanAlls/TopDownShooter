@@ -18,15 +18,20 @@ export var energy_cooldown = 0 # how much time before it recharges
 export var energy_recharge = 0 # how quickly it recharges
 #children nodes
 onready var player = get_node("..")
-onready var animated_sprite = AnimatedSprite.new()
-onready var animator = SpriteFrames.new()
-onready var projectile_point = Node2D.new()
+onready var animated_sprite = AnimatedSprite.new() # the image for the weapon
+onready var animator = SpriteFrames.new() # the spriteframes for the image
+onready var projectile_point = Node2D.new() # where the projectiles come from
+onready var item_beam = ItemBeam.new()
 #Parts
 onready var core = Weapon_Part.new()
 onready var mod1 = Weapon_Part.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_child(item_beam)
+	item_beam.translate(Vector2(32, 0))
+	item_beam.scale = Vector2(2, 2)
+	
 	add_child(core)
 	add_child(mod1)
 	setup_proj_point()
@@ -65,6 +70,7 @@ func _process(delta):
 	pass
 
 func use():
+	print("Parent class: " + get_node("..").get_class())
 	animated_sprite.play("Use")
 	for i in range(projectile_count): # makes the correct number of projectiles
 		var projectile_instance = projectile.instance()

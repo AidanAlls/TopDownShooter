@@ -1,0 +1,35 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-0.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-6.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-7.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-8.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-9.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-10.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-11.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-13.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-14.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-15.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Animation Sprites/Item Beam/Item-Beam-16.png" type="Texture" id=16]
+[ext_resource path="res://Item Beam.gd" type="Script" id=17]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 13.0
+} ]
+
+[node name="Item Beam" type="AnimatedSprite"]
+z_index = -1
+frames = SubResource( 1 )
+animation = "Idle"
+frame = 4
+playing = true
+script = ExtResource( 17 )

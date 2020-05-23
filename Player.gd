@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 var max_speed = 250
 var ACCELERATION = 10000
 var motion = Vector2.ZERO
@@ -62,9 +64,7 @@ func apply_movement(acceleration):
 	motion += acceleration
 	motion = motion.clamped(max_speed)
 
-func render_current_item():
-	pass
-
 func get_pos():
 	return get_global_position()
 
+func get_class(): return "Player"

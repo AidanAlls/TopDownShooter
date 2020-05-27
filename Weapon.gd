@@ -10,6 +10,7 @@ export var projectile_count = 7
 export var projectile_life = 0 # how long it's alive/range
 export var projectile_speed = 800
 export var projectile_size_mult = 2 # multiplied by 1 in Vector2D
+export var projectile_color = Color(1,1,1,1)
 export var accuracy = 0.2 # lower is more accurate
 export var damage = 1 # per projectile
 export var energy_amount = 0 # 'clip size'
@@ -22,18 +23,12 @@ onready var animated_sprite = AnimatedSprite.new() # the image for the weapon
 onready var animator = SpriteFrames.new() # the spriteframes for the image
 onready var projectile_point = Node2D.new() # where the projectiles come from
 onready var item_beam = ItemBeam.new()
-#Parts
-onready var core = Weapon_Part.new()
-onready var mod1 = Weapon_Part.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(item_beam)
 	item_beam.translate(Vector2(32, 0))
 	item_beam.scale = Vector2(2, 2)
-	
-	add_child(core)
-	add_child(mod1)
 	setup_proj_point()
 	setup_animator()
 	
@@ -70,7 +65,7 @@ func _process(delta):
 	pass
 
 func use():
-	print("Parent class: " + get_node("..").get_class())
+	print("weapon name: " + name)
 	animated_sprite.play("Use")
 	for i in range(projectile_count): # makes the correct number of projectiles
 		var projectile_instance = projectile.instance()
@@ -80,6 +75,7 @@ func use():
 		projectile_instance.position = projectile_point.get_global_position()
 		projectile_instance.rotation = rot
 		projectile_instance.scalar = projectile_size_mult
+		projectile_instance.modulate = projectile_color
 		projectile_instance.apply_impulse(Vector2(), Vector2(projectile_speed, 0).rotated(rot + rng.randf_range(-accuracy, accuracy)))
 		get_tree().get_root().add_child(projectile_instance)
 	

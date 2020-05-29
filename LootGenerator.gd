@@ -102,11 +102,20 @@ func setup_mod1s():
 	# Swiftly
 	var mod1_swiftly = Weapon_Part.new() # create new part
 	mod1_swiftly.name_segment = "Swiftly"
-	mod1_swiftly.accuracy_mod = 0.6
+	mod1_swiftly.accuracy_mod = 0.8
 	mod1_swiftly.projectile_size_mult_mod = 0.9
 	mod1_swiftly.use_rate_mod = 1.15
 	mod1_swiftly.projectile_speed_mod = 1.2
 	level_1_mod1s.append(mod1_swiftly) # add it to the array
+	# Questionably
+	var mod1_questionably = Weapon_Part.new() # create new part
+	mod1_questionably.name_segment = "Questionably"
+	mod1_questionably.accuracy_mod = 1.25
+	mod1_questionably.projectile_size_mult_mod = 0.5
+	mod1_questionably.use_rate_mod = 1.1
+	mod1_questionably.projectile_speed_mod = 1.2
+	mod1_questionably.projectile_color_mod = Color(.2, .3, 1, 1)
+	level_1_mod1s.append(mod1_questionably) # add it to the array
 
 func setup_mod2s():
 	# LEVEL 2 MOD2s
@@ -117,20 +126,28 @@ func setup_mod2s():
 	mod2_disqusting.accuracy_mod = 1.1
 	mod2_disqusting.use_rate_mod = 1.1
 	level_1_mod2s.append(mod2_disqusting) # add it to the array
-	# Spongy
-	var mod2_spongy = Weapon_Part.new() # create new part
-	mod2_spongy.name_segment = "Spongy"
-	mod2_spongy.damage_mod = 1.1
-	mod2_spongy.accuracy_mod = 2
-	mod2_spongy.use_rate_mod = 0.5
-	level_1_mod2s.append(mod2_spongy) # add it to the array
+	# Exhilarating
+	var mod2_exhilarating = Weapon_Part.new() # create new part
+	mod2_exhilarating.name_segment = "Exhilarating"
+	mod2_exhilarating.damage_mod = .9
+	mod2_exhilarating.accuracy_mod = .8
+	mod2_exhilarating.use_rate_mod = 0.9
+	mod2_exhilarating.projectile_speed_mod = 1.05
+	level_1_mod2s.append(mod2_exhilarating) # add it to the array
+	# Enticing
+	var mod2_enticing = Weapon_Part.new() # create new part
+	mod2_enticing.name_segment = "Enticing"
+	mod2_enticing.damage_mod = 1.2
+	mod2_enticing.accuracy_mod = 1.1
+	mod2_enticing.use_rate_mod = 1.1
+	level_1_mod2s.append(mod2_enticing) # add it to the array
 
 func setup_mod3s():
 	# LEVEL 1 MOD3s
 	# Mini
 	var mod3_mini = Weapon_Part.new() # create new part
 	mod3_mini.name_segment = "Mini -"
-	mod3_mini.scale_mult_mod = .5
+	mod3_mini.scale_mult_mod = .7
 	mod3_mini.damage_mod = 1.34
 	mod3_mini.projectile_size_mult_mod = 0.5
 	level_1_mod3s.append(mod3_mini) # add it to the array
@@ -141,4 +158,11 @@ func setup_mod3s():
 	mod3_double.projectile_size_mult_mod = 0.8
 	mod3_double.projectile_count_mod = 2
 	level_1_mod3s.append(mod3_double) # add it to the array
-	
+	# Triple
+	var mod3_triple = Weapon_Part.new() # create new part
+	mod3_triple.name_segment = "Triple"
+	mod3_triple.damage_mod = .7
+	mod3_triple.projectile_size_mult_mod = 0.7
+	mod3_triple.projectile_count_mod = 3
+	mod3_triple.use_rate_mod = 1.2
+	level_1_mod3s.append(mod3_triple) # add it to the array

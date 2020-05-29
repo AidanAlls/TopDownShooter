@@ -48,7 +48,7 @@ func set_animations():
 func open():
 	animated_sprite.play("Open")
 	yield(animated_sprite, "animation_finished")
-	var weapon = world.generate_loot()
+	var weapon = world.generate_loot(0)
 	weapon.position = Vector2(self.position.x, self.position.y)
 	world.add_child(weapon)
 	weapon.z_index = 2

@@ -37,7 +37,7 @@ func _ready():
 
 func setup_proj_point(): #sets up where the projectiles come out
 	add_child(projectile_point)
-	projectile_point.translate(Vector2(70,0)) # set up spawn point for projectiles
+	projectile_point.translate(Vector2((36 + 32*(scale_mult*.5)),0)) # set up spawn point for projectiles
 
 func setup_animator():
 	add_child(animated_sprite)

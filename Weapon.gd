@@ -41,7 +41,7 @@ func _ready():
 	set_collision_layer_bit(4, true)
 	set_collision_mask_bit(4, true)
 	set_pickable(true)
-	print("Layer: " + str(get_collision_layer_bit(0)))
+	
 	# item beam
 	add_child(item_beam)
 	item_beam.translate(Vector2(32, 0))

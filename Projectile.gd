@@ -23,6 +23,6 @@ func explode(): # what happens when it breaks
 	queue_free()
 
 func _on_Projectile_body_entered(body):
-	print("body: " + body.get_name() + " body parent: " + body.get_node("..").get_name())
-	if body.get_node("..").get_name() != "Player": # this is a SHITTY Workaround but the layers and masks just LITERALLY DONT FUCKING WORK
-		explode()
+	#print("body: " + body.get_name() + " body parent: " + body.get_node("..").get_name())
+	#if body.get_node("..").get_name() != "Player": # this is a SHITTY Workaround but the layers and masks just LITERALLY DONT FUCKING WORK
+	explode()

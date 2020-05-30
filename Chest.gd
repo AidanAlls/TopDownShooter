@@ -1,4 +1,4 @@
-extends Node
+extends RigidBody2D
 
 onready var animated_sprite = AnimatedSprite.new()
 onready var sprite_frames = SpriteFrames.new()
@@ -7,6 +7,7 @@ onready var shape = RectangleShape2D.new()
 
 var world
 var player
+var can_open = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +20,9 @@ func _ready():
 	
 	world = get_node("..")
 	player = world.get_node("Player")
+	
+	set_contact_monitor(true)
+	set_max_contacts_reported(1)
 
 func set_animations():
 	add_child(animated_sprite)
@@ -63,4 +67,6 @@ func open():
 
 
 func _on_Chest_body_entered(body):
-	open()
+	if can_open:
+		open()
+	can_open = false

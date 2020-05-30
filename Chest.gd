@@ -6,6 +6,7 @@ onready var collider = CollisionShape2D.new()
 onready var shape = RectangleShape2D.new()
 
 var world
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +18,7 @@ func _ready():
 	collider.shape = shape
 	
 	world = get_node("..")
+	player = world.get_node("Player")
 
 func set_animations():
 	add_child(animated_sprite)
@@ -48,7 +50,7 @@ func set_animations():
 func open():
 	animated_sprite.play("Open")
 	yield(animated_sprite, "animation_finished")
-	var weapon = world.generate_loot(0)
+	var weapon = world.generate_loot(player.level)
 	weapon.position = Vector2(self.position.x, self.position.y)
 	world.add_child(weapon)
 	weapon.z_index = 2

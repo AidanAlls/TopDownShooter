@@ -18,17 +18,36 @@ export var energy_drain = 0 # how much used per shot
 export var energy_cooldown = 0 # how much time before it recharges
 export var energy_recharge = 0 # how quickly it recharges
 #children nodes
-onready var player = get_node("..")
+onready var player = get_tree().root.get_child(0).get_child(0)
 onready var animated_sprite = AnimatedSprite.new() # the image for the weapon
 onready var animator = SpriteFrames.new() # the spriteframes for the image
 onready var projectile_point = Node2D.new() # where the projectiles come from
 onready var item_beam = ItemBeam.new()
+onready var click_area = CollisionShape2D.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#collider
+	add_child(click_area)
+	var shape = CapsuleShape2D.new()
+	shape.radius = 5 + 1 * scale_mult
+	shape.height = 16 + 6 * scale_mult
+	click_area.shape = shape
+	click_area.rotation_degrees = 90
+	click_area.position = Vector2(24 + 10 * scale_mult, 0)
+	click_area.connect("input_event", self, "_input_event")
+	set_collision_layer_bit(0, false)
+	set_collision_mask_bit(0, false)
+	set_collision_layer_bit(4, true)
+	set_collision_mask_bit(4, true)
+	set_pickable(true)
+	print("Layer: " + str(get_collision_layer_bit(0)))
+	# item beam
 	add_child(item_beam)
 	item_beam.translate(Vector2(32, 0))
 	item_beam.scale = Vector2(2, 2)
+	
+	# big stuff
 	setup_proj_point()
 	setup_animator()
 	
@@ -65,7 +84,7 @@ func _process(delta):
 	pass
 
 func use():
-	print("weapon name: " + name)
+	#print("weapon name: " + name)
 	animated_sprite.play("Use")
 	for i in range(projectile_count): # makes the correct number of projectiles
 		var projectile_instance = projectile.instance()
@@ -86,99 +105,11 @@ func use():
 func return_idle():
 	animated_sprite.play("Idle")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func get_class(): return "Weapon"
+
+func _input_event(viewport, event, shape_idx):
+	if get_node("..").get_class() != "Player":
+		get_node("..").remove_child(self)
+		player.add_item(self)
+		parent = player
+		position = Vector2(0,0)

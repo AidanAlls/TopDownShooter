@@ -10,9 +10,12 @@ var world
 var player
 var distance_to_player
 var notice_distance = 300
+var max_distance = 280 # the maximum distance the enemy wants to be
+var min_distance
+var distance_range = 135 # will be subtracted from max distance to get min distance
 
-var max_speed = 250
-var ACCELERATION = 10000
+var max_speed = 110
+var ACCELERATION = 1000
 var motion = Vector2.ZERO
 
 var current_item
@@ -21,11 +24,13 @@ var current_item
 func _ready():
 	world = get_node("..")
 	player = world.get_node("Player")
+	
+	min_distance = max_distance - distance_range
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	distance_to_player = get_distance_to(player)
 	if is_idle:
-		distance_to_player = get_distance_to(player)
 		if distance_to_player <= notice_distance:
 			notice_player()
 	else: # if actively pursuing player
@@ -82,7 +87,14 @@ func get_distance_to(object): # gets the distance to a given object
 	return sqrt(x_dist*x_dist + y_dist*y_dist) #return the distance
 
 func get_movement_axis(object): # this is where complex behaviours can be added
-	return position.direction_to(object.get_global_position())
+	var axis = Vector2(0,0) # if nothing else happens, should be 0,0
+	if distance_to_player >= max_distance:
+		axis = position.direction_to(object.get_global_position())
+	elif distance_to_player <= min_distance:
+		axis = position.direction_to(object.get_global_position())
+		axis.x = -axis.x
+		axis.y = -axis.y # turns it backwards
+	return axis
 
 func apply_friction(amount):
 	if motion.length() > amount:

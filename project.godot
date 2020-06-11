@@ -126,6 +126,7 @@ pickup_item={
 2d_physics/layer_3="Enemy Hitbox, Enemy Projectiles"
 2d_physics/layer_4="Chests"
 2d_physics/layer_5="Items"
+2d_physics/layer_6="Hitmarkers"
 
 [rendering]
 

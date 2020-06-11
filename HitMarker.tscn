@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://HitMarker.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.79484
+
+[node name="HitMarker" type="RigidBody2D"]
+z_index = 5
+collision_layer = 0
+collision_mask = 0
+mass = 1.17245
+gravity_scale = 2.3
+script = ExtResource( 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -20.3062
+margin_top = -19.5541
+margin_right = 19.6938
+margin_bottom = 20.4459
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

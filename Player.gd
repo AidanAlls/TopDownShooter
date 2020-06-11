@@ -38,20 +38,20 @@ func _physics_process(delta):
 		elif axis.x > .5 and axis.y < -.5:		# right up
 			pass
 		elif axis.x > .5:						# just right
-			$AnimatedSprite.play("Walk_Right")
+			$AnimatedSprite.play("Idle") # Walk_Right
 		# THE LEFT MOVEMENT ANIMATORS
 		elif axis.x < -.5 and axis.y > .5:		# left down
 			pass
 		elif axis.x < -.5 and axis.y < -.5:		# left up
 			pass
 		elif axis.x < -.5:						# just left
-			$AnimatedSprite.play("Walk_Left")
+			$AnimatedSprite.play("Idle") # Walk_Left
 		# THE DOWN MOVEMENT ANIMATOR
 		elif axis.y > .5:						# just down
-			$AnimatedSprite.play("Walk_Down")
+			$AnimatedSprite.play("Idle") # Walk Down
 		# THE UP MOVEMENT ANIMATOR
 		elif axis.y < -.5:						# just up
-			$AnimatedSprite.play("Walk_Up")
+			$AnimatedSprite.play("Idle") # Walk_Up
 	motion = move_and_slide(motion) # move_and_slide can be changed to a different algorithm
 
 func get_input_axis():

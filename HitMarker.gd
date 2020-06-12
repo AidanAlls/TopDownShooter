@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var time_left = 1
+var time_left = 1.3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

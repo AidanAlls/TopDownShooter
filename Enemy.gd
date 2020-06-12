@@ -19,12 +19,26 @@ var ACCELERATION = 1000
 var motion = Vector2.ZERO
 
 var current_item
+var armor_mult = 1 # a value of less than one will reduce damage taken by that amoubnt
+
+var rng
+var hit_marker = preload("res://HitMarker.tscn")
+var timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_node("..")
 	player = world.get_node("Player")
 	
+	# setup rng
+	rng = RandomNumberGenerator.new()
+	
+	# setup timer
+	timer = Timer.new()
+	timer.connect("timeout",self,"_on_timer_timeout")
+	add_child(timer) #to process
+	
+	# setup min distance
 	min_distance = max_distance - distance_range
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -109,4 +123,34 @@ func apply_movement(acceleration):
 func notice_player():
 	is_idle = false
 	# play notice animation/sound
-	print("Noticed player")
+
+func take_damage(amount):
+	amount = amount * armor_mult
+	health = health - amount
+	
+	# create hitmarker
+	rng.randomize()
+	var hit_marker_instance = hit_marker.instance()
+	get_tree().get_root().add_child(hit_marker_instance)
+	hit_marker_instance.set_global_position(global_position)
+	hit_marker_instance.apply_impulse(Vector2(), Vector2(0, 100).rotated(rng.randf_range(2.4, 3.8)))
+	hit_marker_instance.setup_text(String(amount)) # should be last because queue frees
+	
+	# blink red
+	modulate = Color(1, 0, 0, 1)
+	timer.stop()
+	timer.wait_time = 0.5
+	timer.start()
+	
+	# check if dead
+	if health <= 0:
+		die()
+
+func die():
+	# die animation, sound, etc. goes before queue free
+	queue_free()
+
+func get_class(): return "Enemy"
+
+func _on_timer_timeout():
+	modulate = Color(1, 1, 1, 1)

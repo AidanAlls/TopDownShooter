@@ -4,13 +4,15 @@ class_name Player
 
 var level = 1
 
-var max_speed = 250
+var max_speed = 220
 var ACCELERATION = 10000
 var motion = Vector2.ZERO
 
 var inventory = {}
 var current_item
 var current_item_index = 0
+
+var hit_timer
 
 func _ready():
 	pass
@@ -38,14 +40,14 @@ func _physics_process(delta):
 		elif axis.x > .5 and axis.y < -.5:		# right up
 			pass
 		elif axis.x > .5:						# just right
-			$AnimatedSprite.play("Idle") # Walk_Right
+			$AnimatedSprite.play("Walk_Right") # Walk_Right
 		# THE LEFT MOVEMENT ANIMATORS
 		elif axis.x < -.5 and axis.y > .5:		# left down
 			pass
 		elif axis.x < -.5 and axis.y < -.5:		# left up
 			pass
 		elif axis.x < -.5:						# just left
-			$AnimatedSprite.play("Idle") # Walk_Left
+			$AnimatedSprite.play("Walk_Left") # Walk_Left
 		# THE DOWN MOVEMENT ANIMATOR
 		elif axis.y > .5:						# just down
 			$AnimatedSprite.play("Idle") # Walk Down

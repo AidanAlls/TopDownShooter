@@ -85,12 +85,12 @@ animations = [ {
 "frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ) ],
 "loop": true,
 "name": "Walk_Right",
-"speed": 15.0
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ) ],
 "loop": true,
 "name": "Walk_Left",
-"speed": 15.0
+"speed": 10.0
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
@@ -104,7 +104,7 @@ position = Vector2( 0.117305, -0.0210534 )
 scale = Vector2( 0.960126, 0.966296 )
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 4
+frame = 3
 playing = true
 
 [node name="Feet" type="CollisionShape2D" parent="."]

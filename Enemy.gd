@@ -13,6 +13,8 @@ var notice_distance = 300
 var max_distance = 280 # the maximum distance the enemy wants to be
 var min_distance
 var distance_range = 135 # will be subtracted from max distance to get min distance
+var attack_timer_start = .5 # where the attack timer resets each time
+var attack_timer = .5 # if more is less than the start, will start not attacking but then attack a lot all at once
 
 var max_speed = 110
 var ACCELERATION = 1000
@@ -40,6 +42,11 @@ func _ready():
 	
 	# setup min distance
 	min_distance = max_distance - distance_range
+	
+	# setup item
+	current_item = PigWeapon.new()
+	current_item.projectile_count = 7
+	add_child(current_item)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -48,6 +55,7 @@ func _physics_process(delta):
 		if distance_to_player <= notice_distance:
 			notice_player()
 	else: # if actively pursuing player
+		# movement
 		var axis = get_movement_axis(player)
 		if axis == Vector2.ZERO:
 			apply_friction(ACCELERATION * delta)
@@ -76,6 +84,12 @@ func _physics_process(delta):
 			elif axis.y < -.5:						# just up
 				$AnimatedSprite.play("Idle") # Walk_Up
 		motion = move_and_slide(motion) # move_and_slide can be changed to a different algorithm
+		# attacking
+		if attack_timer <= 0: # that means it can attack
+			current_item.use()
+			attack_timer = attack_timer_start
+		else:
+			attack_timer = attack_timer - delta
 
 func get_distance_to(object): # gets the distance to a given object
 	var obj_pos = object.get_global_position()

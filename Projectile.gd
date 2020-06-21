@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+class_name Projectile
+
 var lifetime
 var damage
 var scalar

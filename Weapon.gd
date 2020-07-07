@@ -5,9 +5,10 @@ class_name Weapon
 var rng
 var projectile = preload("res://Projectile.tscn")
 var scale_mult = 1.6 # 1 is actual size, bigger is larger
+var is_pickable = true
 
 export var projectile_count = 7
-export var projectile_life = 0 # how long it's alive/range
+export var projectile_life = 10 # how long it's alive/range
 export var projectile_speed = 800
 export var projectile_size_mult = 2 # multiplied by 1 in Vector2D
 export var projectile_color = Color(1,1,1,1)
@@ -84,7 +85,6 @@ func _process(delta):
 	pass
 
 func use():
-	#print("weapon name: " + name)
 	animated_sprite.play("Use")
 	for i in range(projectile_count): # makes the correct number of projectiles
 		var projectile_instance = projectile.instance()
@@ -108,8 +108,9 @@ func return_idle():
 func get_class(): return "Weapon"
 
 func _input_event(viewport, event, shape_idx):
-	if get_node("..").get_class() != "Player":
-		get_node("..").remove_child(self)
-		player.add_item(self)
-		parent = player
-		position = Vector2(0,0)
+	if is_pickable:
+		if get_node("..").get_class() != "Player":
+			get_node("..").remove_child(self)
+			player.add_item(self)
+			parent = player
+			position = Vector2(0,0)

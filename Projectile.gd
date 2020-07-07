@@ -15,6 +15,11 @@ func _ready():
 func _process(delta):
 	scale = Vector2(1*scalar, 1*scalar) # for some reason this has to be set every process?
 
+func _physics_process(delta):
+	if lifetime <= 0:
+		explode()
+	lifetime = lifetime - delta
+
 func explode(): # what happens when it breaks
 	set_can_sleep(true)
 	set_sleeping(true)	# these two lines make sure it won't move anymore
@@ -29,8 +34,6 @@ func explode(): # what happens when it breaks
 	queue_free()
 
 func _on_Projectile_body_entered(body):
-	if body.get_name() == "Enemy":
+	if body.get_class() == "Enemy":
 		body.take_damage(damage)
-	#print("body: " + body.get_name() + " body parent: " + body.get_node("..").get_name())
-	#if body.get_node("..").get_name() != "Player": # this is a SHITTY Workaround but the layers and masks just LITERALLY DONT FUCKING WORK
 	explode()

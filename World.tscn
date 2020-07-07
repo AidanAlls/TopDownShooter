@@ -468,6 +468,7 @@ points = PoolVector2Array( 32, 28, 4, 0, 32, 0 )
 [sub_resource type="CircleShape2D" id=21]
 
 [node name="World" type="Node2D"]
+position = Vector2( 29.3006, 87.8862 )
 script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
@@ -505,6 +506,40 @@ z_index = 2
 mass = 65535.0
 gravity_scale = 0.0
 
-[node name="Enemy" parent="." instance=ExtResource( 41 )]
-position = Vector2( 33.2568, -974.691 )
+[node name="5-Shot" parent="." instance=ExtResource( 41 )]
+position = Vector2( -54.1462, -683.927 )
+projectile_life = 3.0
+
+[node name="4-Shot" parent="." instance=ExtResource( 41 )]
+position = Vector2( 166.221, -593.027 )
+projectile_count = 4
+projectile_speed = 246
+projectile_life = 5.0
+
+[node name="Sniper" parent="." instance=ExtResource( 41 )]
+position = Vector2( 272.28, -1090.02 )
+max_distance = 500
+attack_timer_start = 1.7
+attack_timer = 1.7
+projectile_count = 1
+projectile_speed = 650
+max_speed = 90
+
+[node name="Sniper2" parent="." instance=ExtResource( 41 )]
+position = Vector2( 189.962, -1242.9 )
+max_distance = 500
+attack_timer_start = 1.7
+attack_timer = 1.7
+projectile_count = 1
+projectile_speed = 650
+max_speed = 90
+
+[node name="Sniper3" parent="." instance=ExtResource( 41 )]
+position = Vector2( -95.8857, -1190.43 )
+max_distance = 500
+attack_timer_start = 1.7
+attack_timer = 1.7
+projectile_count = 1
+projectile_speed = 650
+max_speed = 90
 [connection signal="body_entered" from="Chest" to="Chest" method="_on_Chest_body_entered"]

@@ -3,6 +3,8 @@ extends KinematicBody2D
 class_name Player
 
 var level = 1
+var health = 4
+var armor_mult = 1 # a value of less than one will reduce damage taken by that amoubnt
 
 var max_speed = 220
 var ACCELERATION = 10000
@@ -12,10 +14,16 @@ var inventory = {}
 var current_item
 var current_item_index = 0
 
+var rng
 var hit_timer
+var hit_marker = preload("res://HitMarker.tscn")
 
 func _ready():
-	pass
+	# setup rng
+	rng = RandomNumberGenerator.new()
+	
+	# setup timer
+	hit_timer = $HitTimer
 
 func _physics_process(delta):
 	# Item selection
@@ -111,7 +119,37 @@ func cycle_down():
 	current_item.visible = true
 	print("Weapon is now: " + current_item.name)
 
+func take_damage(amount):
+	amount = amount * armor_mult
+	health = health - amount
+	
+	# create hitmarker
+	rng.randomize()
+	var hit_marker_instance = hit_marker.instance()
+	get_tree().get_root().add_child(hit_marker_instance)
+	hit_marker_instance.set_global_position(global_position)
+	hit_marker_instance.apply_impulse(Vector2(), Vector2(0, 100).rotated(rng.randf_range(2.4, 3.8)))
+	hit_marker_instance.setup_text(String(amount)) # should be last because queue frees
+	
+	# blink red
+	modulate = Color(1, 0, 0, 1)
+	hit_timer.stop()
+	hit_timer.wait_time = 0.35
+	hit_timer.start()
+	
+	# check if dead
+	if health <= 0:
+		die()
+
+func _on_HitTimer_timeout():
+	modulate = Color(1,1,1,1)
+
+func die():
+	#put animation/sounds here
+	queue_free()
+
 func get_pos():
 	return get_global_position()
 
 func get_class(): return "Player"
+

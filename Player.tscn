@@ -97,6 +97,8 @@ animations = [ {
 radius = 7.32159
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 3
+collision_mask = 64
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -104,7 +106,7 @@ position = Vector2( 0.117305, -0.0210534 )
 scale = Vector2( 0.960126, 0.966296 )
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Feet" type="CollisionShape2D" parent="."]
@@ -120,3 +122,7 @@ drag_margin_left = 0.02
 drag_margin_top = 0.02
 drag_margin_right = 0.02
 drag_margin_bottom = 0.02
+
+[node name="HitTimer" type="Timer" parent="."]
+wait_time = 9.11
+[connection signal="timeout" from="HitTimer" to="." method="_on_HitTimer_timeout"]

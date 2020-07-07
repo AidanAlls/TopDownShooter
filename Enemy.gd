@@ -2,26 +2,31 @@ extends KinematicBody2D
 
 class_name Enemy
 
-var level = 1
-var health = 100
+export var level = 1
+export var health = 100
 
 var is_idle = true
 var world
 var player
 var distance_to_player
-var notice_distance = 300
-var max_distance = 280 # the maximum distance the enemy wants to be
+export var notice_distance = 300
+export var max_distance = 280 # the maximum distance the enemy wants to be
 var min_distance
-var distance_range = 135 # will be subtracted from max distance to get min distance
-var attack_timer_start = .5 # where the attack timer resets each time
-var attack_timer = .5 # if more is less than the start, will start not attacking but then attack a lot all at once
+export var distance_range = 135 # will be subtracted from max distance to get min distance
 
-var max_speed = 110
-var ACCELERATION = 1000
+export var attack_timer_start = .9 # where the attack timer resets each time
+export var attack_timer = .9 # if more is less than the start, will start not attacking but then attack a lot all at once
+
+export var projectile_count = 5
+export var projectile_speed = 300
+export var projectile_life = 1.0
+
+export var max_speed = 110
+export var ACCELERATION = 1000
 var motion = Vector2.ZERO
 
 var current_item
-var armor_mult = 1 # a value of less than one will reduce damage taken by that amoubnt
+export var armor_mult = 1 # a value of less than one will reduce damage taken by that amoubnt
 
 var rng
 var hit_marker = preload("res://HitMarker.tscn")
@@ -45,51 +50,54 @@ func _ready():
 	
 	# setup item
 	current_item = PigWeapon.new()
-	current_item.projectile_count = 7
+	current_item.projectile_count = projectile_count
+	current_item.projectile_speed = projectile_speed
+	current_item.projectile_life = projectile_life
 	add_child(current_item)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	distance_to_player = get_distance_to(player)
-	if is_idle:
-		if distance_to_player <= notice_distance:
-			notice_player()
-	else: # if actively pursuing player
-		# movement
-		var axis = get_movement_axis(player)
-		if axis == Vector2.ZERO:
-			apply_friction(ACCELERATION * delta)
-			$AnimatedSprite.play("Idle") # Plays idle animation when stopped
-		else:
-			apply_movement(axis * ACCELERATION * delta) # apply movement
-			# update animations
-			# THE RIGHT MOVEMENT ANIMATORS
-			if axis.x > .5 and axis.y > .5:			# right down
-				pass
-			elif axis.x > .5 and axis.y < -.5:		# right up
-				pass
-			elif axis.x > .5:						# just right
-				$AnimatedSprite.play("Idle") # Walk_Right
-			# THE LEFT MOVEMENT ANIMATORS
-			elif axis.x < -.5 and axis.y > .5:		# left down
-				pass
-			elif axis.x < -.5 and axis.y < -.5:		# left up
-				pass
-			elif axis.x < -.5:						# just left
-				$AnimatedSprite.play("Idle") # Walk_Left
-			# THE DOWN MOVEMENT ANIMATOR
-			elif axis.y > .5:						# just down
-				$AnimatedSprite.play("Idle") # Walk Down
-			# THE UP MOVEMENT ANIMATOR
-			elif axis.y < -.5:						# just up
-				$AnimatedSprite.play("Idle") # Walk_Up
-		motion = move_and_slide(motion) # move_and_slide can be changed to a different algorithm
-		# attacking
-		if attack_timer <= 0: # that means it can attack
-			current_item.use()
-			attack_timer = attack_timer_start
-		else:
-			attack_timer = attack_timer - delta
+	if world.has_node("Player"):
+		distance_to_player = get_distance_to(player)
+		if is_idle:
+			if distance_to_player <= notice_distance:
+				notice_player()
+		else: # if actively pursuing player
+			# movement
+			var axis = get_movement_axis(player)
+			if axis == Vector2.ZERO:
+				apply_friction(ACCELERATION * delta)
+				$AnimatedSprite.play("Idle") # Plays idle animation when stopped
+			else:
+				apply_movement(axis * ACCELERATION * delta) # apply movement
+				# update animations
+				# THE RIGHT MOVEMENT ANIMATORS
+				if axis.x > .5 and axis.y > .5:			# right down
+					pass
+				elif axis.x > .5 and axis.y < -.5:		# right up
+					pass
+				elif axis.x > .5:						# just right
+					$AnimatedSprite.play("Idle") # Walk_Right
+				# THE LEFT MOVEMENT ANIMATORS
+				elif axis.x < -.5 and axis.y > .5:		# left down
+					pass
+				elif axis.x < -.5 and axis.y < -.5:		# left up
+					pass
+				elif axis.x < -.5:						# just left
+					$AnimatedSprite.play("Idle") # Walk_Left
+				# THE DOWN MOVEMENT ANIMATOR
+				elif axis.y > .5:						# just down
+					$AnimatedSprite.play("Idle") # Walk Down
+				# THE UP MOVEMENT ANIMATOR
+				elif axis.y < -.5:						# just up
+					$AnimatedSprite.play("Idle") # Walk_Up
+			motion = move_and_slide(motion) # move_and_slide can be changed to a different algorithm
+			# attacking
+			if attack_timer <= 0: # that means it can attack
+				current_item.use()
+				attack_timer = attack_timer_start
+			else:
+				attack_timer = attack_timer - delta
 
 func get_distance_to(object): # gets the distance to a given object
 	var obj_pos = object.get_global_position()
@@ -160,11 +168,11 @@ func take_damage(amount):
 	if health <= 0:
 		die()
 
+func _on_timer_timeout():
+	modulate = Color(1, 1, 1, 1)
+
 func die():
 	# die animation, sound, etc. goes before queue free
 	queue_free()
-
+	
 func get_class(): return "Enemy"
-
-func _on_timer_timeout():
-	modulate = Color(1, 1, 1, 1)

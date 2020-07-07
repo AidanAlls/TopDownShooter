@@ -7,7 +7,7 @@ var name_segment
 
 export var scale_mult_mod = 1
 export var projectile_count_mod = 1
-export var projectile_life_mod = 0 # how long it's alive/range CURRENTLY INACTIVE
+export var projectile_life_mod = 1 # how long it's alive/range 
 export var projectile_speed_mod = 1
 export var projectile_size_mult_mod = 2 # multiplied by 1 in Vector2D
 export var projectile_color_mod = Color(1,1,1,1)

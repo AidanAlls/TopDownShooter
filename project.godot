@@ -134,11 +134,13 @@ pickup_item={
 [layer_names]
 
 2d_physics/layer_1="Environment, Feet"
-2d_physics/layer_2="Player Hitbox, Player Projectiles"
-2d_physics/layer_3="Enemy Hitbox, Enemy Projectiles"
+2d_physics/layer_2="Player Hitbox"
+2d_physics/layer_3="Enemy Hitbox"
 2d_physics/layer_4="Chests"
 2d_physics/layer_5="Items"
 2d_physics/layer_6="Hitmarkers"
+2d_physics/layer_7="Enemy Projectiles"
+2d_physics/layer_8="Player Projectiles"
 
 [rendering]
 

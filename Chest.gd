@@ -17,8 +17,7 @@ func _ready():
 	shape.extents = Vector2(36.8, 25)
 	add_child(collider)
 	collider.shape = shape
-	
-	world = get_node("..")
+	world = get_node("/root").get_child(0)
 	player = world.get_node("Player")
 	
 	set_contact_monitor(true)
@@ -54,19 +53,42 @@ func set_animations():
 func open():
 	animated_sprite.play("Open")
 	yield(animated_sprite, "animation_finished")
-	var weapon = world.generate_loot(player.level)
-	weapon.position = Vector2(self.position.x, self.position.y)
-	world.add_child(weapon)
-	weapon.z_index = 2
-	weapon.translate(Vector2(-32, 0))
+	world.place_loot(global_position)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if Input.is_action_just_released("interact"):
+		if can_open:
+			player = world.get_node("Player")
+			print("player pos: " + str(player.position))
+			print("distance: " + str(position.distance_to(player.position)))
+			if world.has_node("Player"):
+				var distance_to_player = get_distance_to(player)
+				if distance_to_player < 60:
+					print("it's close enough")
+					open()
+					can_open = false
 
-
-func _on_Chest_body_entered(body):
-	if can_open:
-		open()
-	can_open = false
+func get_distance_to(object): # gets the distance to a given object
+	var obj_pos = object.get_global_position()
+	var pos = get_global_position()
+	
+	var max_x = max(obj_pos.x, pos.x)
+	var max_y = max(obj_pos.y, pos.y)
+	var min_x = min(obj_pos.x, pos.x)
+	var min_y = min(obj_pos.y, pos.y)
+	
+	var x_dist = max_x - min_x
+	var y_dist = max_y - min_y
+	
+	if x_dist == 0 && y_dist == 0: # if both 0, we have no distance
+		return 0
+	
+	if x_dist == 0: # then y_dist is dist
+		return y_dist
+	
+	if y_dist == 0: # then x_dist is 0
+		return x_dist
+	
+	return sqrt(x_dist*x_dist + y_dist*y_dist) #return the distance

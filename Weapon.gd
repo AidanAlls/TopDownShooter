@@ -19,7 +19,7 @@ export var energy_drain = 0 # how much used per shot
 export var energy_cooldown = 0 # how much time before it recharges
 export var energy_recharge = 0 # how quickly it recharges
 #children nodes
-onready var player = get_tree().root.get_child(0).get_child(0)
+onready var player = get_node("/root").get_child(0).get_child(0)
 onready var animated_sprite = AnimatedSprite.new() # the image for the weapon
 onready var animator = SpriteFrames.new() # the spriteframes for the image
 onready var projectile_point = Node2D.new() # where the projectiles come from

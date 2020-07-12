@@ -1,49 +1,49 @@
 [gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-2.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-3.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-1.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-1.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-2.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-3.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-4.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-5.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-6.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-7.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-8.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-9.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-10.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-11.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-12.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-13.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-14.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-15.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-16.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-1.png" type="Texture" id=21]
-[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-2.png" type="Texture" id=22]
-[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-3.png" type="Texture" id=23]
-[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-4.png" type="Texture" id=24]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-1.png" type="Texture" id=25]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-2.png" type="Texture" id=26]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-3.png" type="Texture" id=27]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-4.png" type="Texture" id=28]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-5.png" type="Texture" id=29]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-6.png" type="Texture" id=30]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-7.png" type="Texture" id=31]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-8.png" type="Texture" id=32]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-9.png" type="Texture" id=33]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-10.png" type="Texture" id=34]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-11.png" type="Texture" id=35]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-12.png" type="Texture" id=36]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-13.png" type="Texture" id=37]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-14.png" type="Texture" id=38]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-15.png" type="Texture" id=39]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-16.png" type="Texture" id=40]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-17.png" type="Texture" id=41]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-18.png" type="Texture" id=42]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-19.png" type="Texture" id=43]
-[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-20.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Animation Sprites/Walk Up/Character_Walk_Up-4.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-3.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-4.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-5.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-6.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-7.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-8.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-9.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-10.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-11.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-12.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-13.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-14.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-15.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Animation Sprites/Idle/Character_Idle-16.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-1.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-2.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-3.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-4.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-5.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-6.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-7.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-8.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-9.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-10.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-11.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-12.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-13.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-14.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-15.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-16.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-17.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-18.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-19.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Animation Sprites/Walk Right/Character_Walk_Right_Cape-20.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-2.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-3.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Animation Sprites/Walk Down/Character_Walk_Down-1.png" type="Texture" id=44]
 [ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left_Cape-1.png" type="Texture" id=45]
 [ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left_Cape-2.png" type="Texture" id=46]
 [ext_resource path="res://Assets/Animation Sprites/Walk Left/Character_Walk_Left_Cape-3.png" type="Texture" id=47]
@@ -67,25 +67,25 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ],
-"loop": true,
-"name": "Walk_Down",
-"speed": 7.0
-}, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Walk_Up",
 "speed": 7.0
 }, {
-"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ) ],
 "loop": true,
 "name": "Walk_Right",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 42 ), ExtResource( 43 ), ExtResource( 42 ), ExtResource( 44 ) ],
+"loop": true,
+"name": "Walk_Down",
+"speed": 7.0
 }, {
 "frames": [ ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 59 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ) ],
 "loop": true,
@@ -98,7 +98,7 @@ radius = 7.32159
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 3
-collision_mask = 64
+collision_mask = 72
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -106,7 +106,6 @@ position = Vector2( 0.117305, -0.0210534 )
 scale = Vector2( 0.960126, 0.966296 )
 frames = SubResource( 1 )
 animation = "Idle"
-frame = 1
 playing = true
 
 [node name="Feet" type="CollisionShape2D" parent="."]

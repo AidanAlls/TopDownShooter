@@ -34,8 +34,8 @@ var timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	world = get_node("..")
-	player = world.get_node("Player")
+	world = get_node("/root").get_child(0)
+	player = world.get_child(0)
 	
 	# setup rng
 	rng = RandomNumberGenerator.new()

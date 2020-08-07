@@ -14,6 +14,7 @@ var min_size = 8
 var max_size = 24
 var h_spread = 400
 var cull = 0.62 # rough percentage of rooms that will be removed 0.5 = 50%
+var rock_cull = 0.05 # what percetage of tiles will have rocks on them
 var screen_buffer = 30 # num tiles buffer from edge of map
 var tile_buffer = 5 # num tiles buffer from edge of physical room collidor
 
@@ -110,6 +111,8 @@ func find_mst(nodes):
 func make_map():
 	# creates tilemap from generated rooms/paths
 	Map.clear()
+	
+	# BACKGROUND 
 	# fill area with ocean water
 	var full_rect = Rect2()
 	for room in rooms.get_children():
@@ -121,22 +124,29 @@ func make_map():
 		for y in range(topleft.y - screen_buffer, bottomright.y + screen_buffer):
 			Map.set_cell(x, y, 0) # sets everything to water, CAN POTENTIALL JUST HAVE BACKGROUND BE WATER??
 	
-	# carve rooms
 	var corridors = []
+	
+	# MAP
+	# carve rooms
 	for room in rooms.get_children():
-		var s = (room.size / tile_size).floor() # number of tiles
-		var pos = Map.world_to_map(room.position)
-		var upper_left = (room.position / tile_size).floor() - s
+#		var s = (room.size / tile_size).floor() # number of tiles
+#		var pos = Map.world_to_map(room.position)
+#		var upper_left = (room.position / tile_size).floor() - s
 		
-		# set snow
-		for x in range (2, s.x * 2 - tile_buffer): # starts at 2 so buffer of 2 tiles
-			for y in range(2, s.y * 2 - tile_buffer):
-				Map.set_cell(upper_left.x + x, upper_left.y + y, 1)
+		var pos_list = room.get_room_tiles() # returns all the tiles that need to be removed from Map
+		var border_list = room.get_border_tiles()
+		remove_tiles(pos_list)
+		place_room_tiles(pos_list, border_list)
 		
-		# set snow border
-		for x in range (1, s.x * 2 - (tile_buffer - 1)): # starts at 1 so outside of tiles
-			for y in range(1, s.y * 2 - (tile_buffer - 1)):
-				DetailMap.set_cell(upper_left.x + x, upper_left.y + y, 0)
+#		# set snow
+#		for x in range (2, s.x * 2 - tile_buffer): # starts at 2 so buffer of 2 tiles
+#			for y in range(2, s.y * 2 - tile_buffer):
+#				Map.set_cell(upper_left.x + x, upper_left.y + y, 1)
+#
+#		# set snow border
+#		for x in range (1, s.x * 2 - (tile_buffer - 1)): # starts at 1 so outside of tiles
+#			for y in range(1, s.y * 2 - (tile_buffer - 1)):
+#				DetailMap.set_cell(upper_left.x + x, upper_left.y + y, 0)
 		
 		# carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, room.position.y, 0))
@@ -155,6 +165,29 @@ func make_map():
 	find_end_room()
 	
 	emit_signal("finished_generation") # emits custom signal
+
+func remove_tiles(pos_list): # removes tiles from the pos_list of global coords
+	for pos in pos_list:
+		pos = Map.world_to_map(pos)
+		
+		print("removing: " + str(pos))
+		Map.set_cell(pos.x, pos.y, -1)
+		DetailMap.set_cell(pos.x, pos.y, -1)
+
+func place_room_tiles(pos_list, border_list):
+	
+	for pos in border_list: # border
+		pos = Map.world_to_map(pos)
+		DetailMap.set_cell(pos.x, pos.y, 0)
+	
+	
+	for pos in pos_list: # snow
+		pos = Map.world_to_map(pos)
+		Map.set_cell(pos.x, pos.y, 1) # set snow
+		#DetailMap.set_cell(pos.x, pos.y, -1) # remove border
+		if randf() < rock_cull:
+			DetailMap.set_cell(pos.x, pos.y, 1) # set rock
+	
 
 func find_start_room():
 	# finds farthest left room

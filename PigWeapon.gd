@@ -21,6 +21,8 @@ func _ready():
 	
 	player = parent.get_node("..").get_child(0)
 	world = parent.get_node("..")
+	
+	item_beam.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

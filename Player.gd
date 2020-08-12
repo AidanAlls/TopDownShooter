@@ -6,7 +6,7 @@ var level = 1
 var health = 4
 var armor_mult = 1 # a value of less than one will reduce damage taken by that amoubnt
 
-var max_speed = 500
+var max_speed = 420
 var ACCELERATION = 10000
 var motion = Vector2.ZERO
 

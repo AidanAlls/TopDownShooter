@@ -15,7 +15,7 @@ var min_distance
 export var distance_range = 135 # will be subtracted from max distance to get min distance
 
 export var attack_timer_start = .9 # where the attack timer resets each time
-export var attack_timer = .9 # if more is less than the start, will start not attacking but then attack a lot all at once
+export var attack_timer = .9 # the starting attack time, in seconds
 
 export var projectile_count = 5
 export var projectile_speed = 300
@@ -27,6 +27,7 @@ var motion = Vector2.ZERO
 
 var current_item
 export var armor_mult = 1 # a value of less than one will reduce damage taken by that amoubnt
+var normal_color = Color(1, 1, 1, 1)
 
 var rng
 var hit_marker = preload("res://HitMarker.tscn")
@@ -169,7 +170,7 @@ func take_damage(amount):
 		die()
 
 func _on_timer_timeout():
-	modulate = Color(1, 1, 1, 1)
+	modulate = normal_color
 
 func die():
 	# die animation, sound, etc. goes before queue free

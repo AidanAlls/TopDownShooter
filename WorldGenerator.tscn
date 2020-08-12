@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://WorldGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tileset Sprites/Water/Water-1.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Tileset Sprites/Water/Water-6.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Tileset Sprites/32-bit_Snow_Tileset.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Tileset Sprites/32-bit_Snow_Tileset copy.png" type="Texture" id=9]
+[ext_resource path="res://EnemyGenerator.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -112,3 +113,5 @@ z_index = 1
 tile_set = SubResource( 4 )
 cell_size = Vector2( 32, 32 )
 format = 1
+
+[node name="EnemyGenerator" parent="." instance=ExtResource( 10 )]

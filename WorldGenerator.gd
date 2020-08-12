@@ -2,9 +2,10 @@ extends Node2D
 
 var room = preload("res://Room.tscn")
 
+onready var rooms = $Rooms
 onready var Map = $TileMap
 onready var DetailMap = $TileMapDetails
-onready var rooms = $Rooms
+onready var EnemyGenerator = $EnemyGenerator
 onready var world = get_node("/root").get_child(0)
 onready var Player = world.get_child(0)
 
@@ -15,6 +16,7 @@ var max_size = 24
 var h_spread = 400
 var cull = 0.62 # rough percentage of rooms that will be removed 0.5 = 50%
 var rock_cull = 0.05 # what percetage of tiles will have rocks on them
+var enemy_cull = 0.005 # what percentage of tiles will have enemies on them
 var screen_buffer = 30 # num tiles buffer from edge of map
 var tile_buffer = 5 # num tiles buffer from edge of physical room collidor
 
@@ -129,24 +131,11 @@ func make_map():
 	# MAP
 	# carve rooms
 	for room in rooms.get_children():
-#		var s = (room.size / tile_size).floor() # number of tiles
-#		var pos = Map.world_to_map(room.position)
-#		var upper_left = (room.position / tile_size).floor() - s
-		
 		var pos_list = room.get_room_tiles() # returns all the tiles that need to be removed from Map
 		var border_list = room.get_border_tiles()
 		remove_tiles(pos_list)
 		place_room_tiles(pos_list, border_list)
-		
-#		# set snow
-#		for x in range (2, s.x * 2 - tile_buffer): # starts at 2 so buffer of 2 tiles
-#			for y in range(2, s.y * 2 - tile_buffer):
-#				Map.set_cell(upper_left.x + x, upper_left.y + y, 1)
-#
-#		# set snow border
-#		for x in range (1, s.x * 2 - (tile_buffer - 1)): # starts at 1 so outside of tiles
-#			for y in range(1, s.y * 2 - (tile_buffer - 1)):
-#				DetailMap.set_cell(upper_left.x + x, upper_left.y + y, 0)
+		place_enemies(pos_list) # should eventually happen on enter room
 		
 		# carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, room.position.y, 0))
@@ -169,8 +158,6 @@ func make_map():
 func remove_tiles(pos_list): # removes tiles from the pos_list of global coords
 	for pos in pos_list:
 		pos = Map.world_to_map(pos)
-		
-		print("removing: " + str(pos))
 		Map.set_cell(pos.x, pos.y, -1)
 		DetailMap.set_cell(pos.x, pos.y, -1)
 
@@ -188,6 +175,16 @@ func place_room_tiles(pos_list, border_list):
 		if randf() < rock_cull:
 			DetailMap.set_cell(pos.x, pos.y, 1) # set rock
 	
+
+func place_enemies(pos_list):
+	var e
+	for pos in pos_list:
+		if randf() < enemy_cull: # should be own number (not just cull)
+			print("placing enemy...")
+			#pos = Map.world_to_map(pos)
+			e = EnemyGenerator.get_enemy()
+			world.add_child(e)
+			e.position = pos
 
 func find_start_room():
 	# finds farthest left room

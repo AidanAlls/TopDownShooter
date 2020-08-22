@@ -181,7 +181,7 @@ func place_enemies(pos_list, room):
 			#pos = Map.world_to_map(pos)
 			e = EnemyGenerator.get_enemy()
 			room.Enemies.add_child(e)
-			e.position = pos
+			e.position = Map.map_to_world(Map.world_to_map(pos + Vector2(0, tile_size)))
 	room.num_enemies = room.Enemies.get_child_count()
 
 func update_border_map(pos_list): # Adds border blocks around a room, adding to the total border map that gets activated every time you enter a room

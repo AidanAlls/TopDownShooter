@@ -1,12 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Chest.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://WorldGenerator.tscn" type="PackedScene" id=5]
-
-[sub_resource type="CircleShape2D" id=21]
+[ext_resource path="res://WorldGenerator.tscn" type="PackedScene" id=3]
 
 [node name="World" type="Node2D"]
 position = Vector2( 29.3006, 87.8862 )
@@ -16,62 +12,5 @@ script = ExtResource( 1 )
 position = Vector2( 40, -100 )
 z_index = 3
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-editor/display_folded = true
-position = Vector2( 104.03, -150.64 )
-z_index = 3
-collision_layer = 4
-collision_mask = 2
-mass = 65535.0
-gravity_scale = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2( -214.587, 5.59506 )
-shape = SubResource( 21 )
-
-[node name="Chest" parent="." instance=ExtResource( 3 )]
-position = Vector2( 142.759, -294.728 )
-z_index = 2
-mass = 65535.0
-gravity_scale = 0.0
-
-[node name="5-Shot" parent="." instance=ExtResource( 4 )]
-position = Vector2( -54.1462, -683.927 )
-projectile_life = 3.0
-
-[node name="4-Shot" parent="." instance=ExtResource( 4 )]
-position = Vector2( 166.221, -593.027 )
-projectile_count = 4
-projectile_speed = 246
-projectile_life = 5.0
-
-[node name="Sniper" parent="." instance=ExtResource( 4 )]
-position = Vector2( 272.28, -1090.02 )
-max_distance = 500
-attack_timer_start = 1.7
-attack_timer = 1.7
-projectile_count = 1
-projectile_speed = 650
-max_speed = 90
-
-[node name="Sniper2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 189.962, -1242.9 )
-max_distance = 500
-attack_timer_start = 1.7
-attack_timer = 1.7
-projectile_count = 1
-projectile_speed = 650
-max_speed = 90
-
-[node name="Sniper3" parent="." instance=ExtResource( 4 )]
-position = Vector2( -95.8857, -1190.43 )
-max_distance = 500
-attack_timer_start = 1.7
-attack_timer = 1.7
-projectile_count = 1
-projectile_speed = 650
-max_speed = 90
-
-[node name="WorldGenerator" parent="." instance=ExtResource( 5 )]
-[connection signal="body_entered" from="Chest" to="Chest" method="_on_Chest_body_entered"]
+[node name="WorldGenerator" parent="." instance=ExtResource( 3 )]
 [connection signal="finished_generation" from="WorldGenerator" to="." method="_on_WorldGenerator_finished_generation"]

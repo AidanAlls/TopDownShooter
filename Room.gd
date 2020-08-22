@@ -1,11 +1,16 @@
+# world gen/physical world, but not entire enviroenment (no chests
+
 extends RigidBody2D
 
 onready var type = ""
 onready var Map = $TileMap
 onready var DetailMap = $TileMapDetails
 onready var Collider = $CollisionShape2D
+onready var Enemies = $Enemies
 onready var world = get_node("/root").get_child(0)
 onready var player = world.get_child(0)
+onready var world_gen = world.get_child(1)
+onready var BorderMap = world_gen.get_child(3)
 
 var size
 var size_factor
@@ -15,9 +20,12 @@ var tile_buffer = 2
 var tile_border_buffer
 var distance_to_player = 0
 var unvisited = true
+var finished = false
 var tile_list # all the floor tiles
 var tile_border_list # all the floor tiles plus a border (for trim)
 var border_list # all the edge tiles (no inner tiles included)
+var num_enemies = 10000
+
 
 var chest = preload("res://Chest.tscn")
 
@@ -25,11 +33,17 @@ func _ready():
 	pass
 
 func _process(delta):
-	if unvisited:
+	if finished:
+		return
+	if unvisited && (type != "start"):
 		distance_to_player = get_distance_to(player)
-		if distance_to_player < min_dimension:
+		if distance_to_player < min_dimension*0.5:
 			unvisited = false
-			#var world_gen = world.get_child(
+			activate_room()
+	else: # if visited but not finished AKA still fighting
+		num_enemies = Enemies.get_child_count()
+		if num_enemies <= 0:
+			finish_room()
 
 # makes room in initial position BEFORE COLLISION MOVES EVERYTHING
 func make_room(_pos, _size):
@@ -44,6 +58,18 @@ func make_room(_pos, _size):
 	min_dimension = min(size.x, size.y)
 	size_factor = int(average_size / tile_size)
 	tile_border_buffer = tile_buffer - 1
+
+func activate_room():
+	world_gen.place_enemies(tile_list, self)
+	world_gen.BorderMap = world_gen.BorderMap_holder
+	world_gen.add_child(world_gen.BorderMap)
+	BorderMap.visible = true
+
+func finish_room():
+	# do pickup spawning here
+	BorderMap.visible = false
+	world_gen.remove_child(world_gen.BorderMap)
+	finished = true
 
 func get_room_tiles(): # returns a list of all the tiles the room is made of
 	var s = (size / tile_size).floor() # half number of tiles (tile extents)
@@ -61,6 +87,7 @@ func get_room_tiles(): # returns a list of all the tiles the room is made of
 			current_pos = global_node.global_position # convert to global coords
 			pos_list.append(current_pos ) # we need to remove the water tiles from world map bc they are the collsion tiles
 	
+	tile_list = pos_list
 	return pos_list
 
 func get_border_tiles():
@@ -79,12 +106,12 @@ func get_border_tiles():
 			current_pos = global_node.global_position # convert to global coords
 			pos_list.append(current_pos ) # we need to remove the water tiles from world map bc they are the collsion tiles
 	
+	tile_border_list = pos_list
 	return pos_list
 
 func make_room_map():
 	Map.clear()
 	DetailMap.clear()
-	align_to_world()
 	
 	var s = (size / tile_size).floor() # half number of tiles (tile extents)
 	var upper_left = -s
@@ -112,20 +139,12 @@ func make_room_map():
 	DetailMap.update_bitmask_region()
 	return pos_list
 
-func align_to_world(): # aligns to world tilemap
-	Collider.disabled = true
-	var world_map = world.get_node("WorldGenerator").Map
-	
-	position = world_map.map_to_world(world_map.world_to_map(position))
-
-
 func populate():
 	if type == "start":
-		pass
+		return
 	elif type == "end":
-		pass
+		return
 	elif type == "chest":
-		print("chest room!")
 		var c = chest.instance()
 		add_child(c)
 		c.global_position = global_position #Vector2(global_position.x, global_position.y)

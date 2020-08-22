@@ -6,6 +6,7 @@ onready var rooms = $Rooms
 onready var Map = $TileMap
 onready var DetailMap = $TileMapDetails
 onready var BorderMap = $BorderMap
+onready var BorderMap_holder = TileMap.new()
 onready var EnemyGenerator = $EnemyGenerator
 onready var world = get_node("/root").get_child(0)
 onready var Player = world.get_child(0)
@@ -73,18 +74,6 @@ func _draw():
 func _process(delta):
 	update()
 
-#func _input(event):
-#	if event.is_action_pressed("ui_select"):
-#		for n in $Rooms.get_children():
-#			n.queue_free()
-#		path = null
-#		make_rooms()
-#		var start_index = randi() % $Rooms.get_children().size()
-#		print("start index: " + str(start_index))
-#		Player.set_global_position($Rooms.get_child(start_index).position)
-#	if event.is_action_pressed("ui_focus_next"):
-#		make_map()
-
 func find_mst(nodes):
 	# Prim's algorithm
 	var path = AStar.new()
@@ -136,13 +125,10 @@ func make_map():
 		var tile_border_list = room.get_border_tiles()
 		var border_list = room.find_unique(tile_border_list, tile_list)
 		
-		room.tile_list = tile_list
-		room.tile_border_list = tile_border_list
 		room.border_list = border_list
 		
 		remove_tiles(tile_list)
 		place_room_tiles(tile_list, tile_border_list)
-		place_enemies(tile_list) # should eventually happen on enter room
 		update_border_map(border_list)
 		
 		# carve connecting corridor
@@ -160,6 +146,10 @@ func make_map():
 	# place special rooms
 	find_start_room()
 	find_end_room()
+	
+	# disable bordermap
+	BorderMap_holder = BorderMap
+	remove_child($BorderMap)
 	
 	emit_signal("finished_generation") # emits custom signal
 
@@ -184,15 +174,15 @@ func place_room_tiles(pos_list, border_list):
 			DetailMap.set_cell(pos.x, pos.y, 1) # set rock
 	
 
-func place_enemies(pos_list):
+func place_enemies(pos_list, room):
 	var e
 	for pos in pos_list:
 		if randf() < enemy_cull: # should be own number (not just cull)
-			print("placing enemy...")
 			#pos = Map.world_to_map(pos)
 			e = EnemyGenerator.get_enemy()
-			world.add_child(e)
+			room.Enemies.add_child(e)
 			e.position = pos
+	room.num_enemies = room.Enemies.get_child_count()
 
 func update_border_map(pos_list): # Adds border blocks around a room, adding to the total border map that gets activated every time you enter a room
 	for pos in pos_list:

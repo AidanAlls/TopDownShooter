@@ -2,10 +2,10 @@ extends Weapon
 
 class_name PigWeapon
 
+onready var world = get_node("/root").get_child(0)
+
 export var step_degree = 27
 var spread
-
-var world
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,10 +19,8 @@ func _ready():
 	# OVERWRITES
 	is_pickable = false
 	
-	player = parent.get_node("..").get_child(0)
-	world = parent.get_node("..")
-	
 	item_beam.visible = false
+	player = world.get_child(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

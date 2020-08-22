@@ -24,12 +24,6 @@ func place_loot(pos, mod = 0):
 	
 
 func _input(event):
-	if event.is_action_pressed("ui_select"):
-		for n in world_gen.rooms.get_children():
-			n.queue_free()
-		world_gen.path = null
-		world_gen.make_rooms()
-
 	if event.is_action_pressed("ui_focus_next"):
 		world_gen.make_map()
 		world_gen.populate_rooms()

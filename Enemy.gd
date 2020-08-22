@@ -58,7 +58,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if world.has_node("Player"):
+	if world.has_node("Player") && health >= 0:
 		distance_to_player = get_distance_to(player)
 		if is_idle:
 			if distance_to_player <= notice_distance:

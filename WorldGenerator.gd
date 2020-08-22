@@ -5,6 +5,7 @@ var room = preload("res://Room.tscn")
 onready var rooms = $Rooms
 onready var Map = $TileMap
 onready var DetailMap = $TileMapDetails
+onready var BorderMap = $BorderMap
 onready var EnemyGenerator = $EnemyGenerator
 onready var world = get_node("/root").get_child(0)
 onready var Player = world.get_child(0)
@@ -131,11 +132,18 @@ func make_map():
 	# MAP
 	# carve rooms
 	for room in rooms.get_children():
-		var pos_list = room.get_room_tiles() # returns all the tiles that need to be removed from Map
-		var border_list = room.get_border_tiles()
-		remove_tiles(pos_list)
-		place_room_tiles(pos_list, border_list)
-		place_enemies(pos_list) # should eventually happen on enter room
+		var tile_list = room.get_room_tiles() # returns all the tiles that need to be removed from Map
+		var tile_border_list = room.get_border_tiles()
+		var border_list = room.find_unique(tile_border_list, tile_list)
+		
+		room.tile_list = tile_list
+		room.tile_border_list = tile_border_list
+		room.border_list = border_list
+		
+		remove_tiles(tile_list)
+		place_room_tiles(tile_list, tile_border_list)
+		place_enemies(tile_list) # should eventually happen on enter room
+		update_border_map(border_list)
 		
 		# carve connecting corridor
 		var p = path.get_closest_point(Vector3(room.position.x, room.position.y, 0))
@@ -185,6 +193,11 @@ func place_enemies(pos_list):
 			e = EnemyGenerator.get_enemy()
 			world.add_child(e)
 			e.position = pos
+
+func update_border_map(pos_list): # Adds border blocks around a room, adding to the total border map that gets activated every time you enter a room
+	for pos in pos_list:
+		pos = Map.world_to_map(pos)
+		BorderMap.set_cell(pos.x, pos.y, 0)
 
 func find_start_room():
 	# finds farthest left room

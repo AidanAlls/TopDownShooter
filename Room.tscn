@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Room.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tileset Sprites/Water/Water-1.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Tileset Sprites/Water/Water-6.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Tileset Sprites/32-bit_Snow_Tileset.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Tileset Sprites/32-bit_Snow_Tileset copy.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Placeholder.png" type="Texture" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -96,6 +97,27 @@ frame_5/delay_sec = 0.0
 1/shapes = [  ]
 1/z_index = 0
 
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=6]
+0/name = "Placeholder.png 0"
+0/texture = ExtResource( 10 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
 [node name="Room" type="RigidBody2D"]
 collision_layer = 256
 collision_mask = 256
@@ -112,4 +134,10 @@ format = 1
 [node name="TileMapDetails" type="TileMap" parent="."]
 tile_set = SubResource( 4 )
 cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="Border" type="TileMap" parent="."]
+tile_set = SubResource( 6 )
+cell_size = Vector2( 32, 32 )
+collision_mask = 0
 format = 1

@@ -4,19 +4,32 @@ onready var type = ""
 onready var Map = $TileMap
 onready var DetailMap = $TileMapDetails
 onready var Collider = $CollisionShape2D
+onready var world = get_node("/root").get_child(0)
+onready var player = world.get_child(0)
 
 var size
 var size_factor
+var min_dimension = 0
 var tile_size = 32
 var tile_buffer = 2
 var tile_border_buffer
-var world
-
+var distance_to_player = 0
+var unvisited = true
+var tile_list # all the floor tiles
+var tile_border_list # all the floor tiles plus a border (for trim)
+var border_list # all the edge tiles (no inner tiles included)
 
 var chest = preload("res://Chest.tscn")
 
 func _ready():
-	world = get_node("/root").get_child(0)
+	pass
+
+func _process(delta):
+	if unvisited:
+		distance_to_player = get_distance_to(player)
+		if distance_to_player < min_dimension:
+			unvisited = false
+			#var world_gen = world.get_child(
 
 # makes room in initial position BEFORE COLLISION MOVES EVERYTHING
 func make_room(_pos, _size):
@@ -28,6 +41,7 @@ func make_room(_pos, _size):
 	$CollisionShape2D.shape = s
 	
 	var average_size = (size.x + size.y) / 2
+	min_dimension = min(size.x, size.y)
 	size_factor = int(average_size / tile_size)
 	tile_border_buffer = tile_buffer - 1
 
@@ -103,7 +117,7 @@ func align_to_world(): # aligns to world tilemap
 	var world_map = world.get_node("WorldGenerator").Map
 	
 	position = world_map.map_to_world(world_map.world_to_map(position))
-	
+
 
 func populate():
 	if type == "start":
@@ -121,3 +135,33 @@ func populate():
 		pass
 	else: # standard room w enemies
 		pass
+
+func find_unique(set1, set2): #returns the items only found in set1
+	var unique_set = []
+	for item in set1:
+		if ! set2.has(item):
+			unique_set.append(item)
+	return unique_set
+
+func get_distance_to(object): # gets the distance to a given object
+	var obj_pos = object.get_global_position()
+	var pos = get_global_position()
+	
+	var max_x = max(obj_pos.x, pos.x)
+	var max_y = max(obj_pos.y, pos.y)
+	var min_x = min(obj_pos.x, pos.x)
+	var min_y = min(obj_pos.y, pos.y)
+	
+	var x_dist = max_x - min_x
+	var y_dist = max_y - min_y
+	
+	if x_dist == 0 && y_dist == 0: # if both 0, we have no distance
+		return 0
+	
+	if x_dist == 0: # then y_dist is dist
+		return y_dist
+	
+	if y_dist == 0: # then x_dist is 0
+		return x_dist
+	
+	return sqrt(x_dist*x_dist + y_dist*y_dist) #return the distance

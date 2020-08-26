@@ -1,100 +1,6 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Room.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Tileset Sprites/Water/Water-1.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Tileset Sprites/Water/Water-2.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Tileset Sprites/Water/Water-3.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Tileset Sprites/Water/Water-4.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Tileset Sprites/Water/Water-5.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Tileset Sprites/Water/Water-6.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Tileset Sprites/32-bit_Snow_Tileset.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Tileset Sprites/32-bit_Snow_Tileset copy.png" type="Texture" id=9]
-
-[sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
-
-[sub_resource type="AnimatedTexture" id=2]
-frames = 6
-fps = 7.0
-frame_0/texture = ExtResource( 2 )
-frame_1/texture = ExtResource( 3 )
-frame_1/delay_sec = 0.0
-frame_2/texture = ExtResource( 4 )
-frame_2/delay_sec = 0.0
-frame_3/texture = ExtResource( 5 )
-frame_3/delay_sec = 0.0
-frame_4/texture = ExtResource( 6 )
-frame_4/delay_sec = 0.0
-frame_5/texture = ExtResource( 7 )
-frame_5/delay_sec = 0.0
-
-[sub_resource type="TileSet" id=3]
-0/name = "Water"
-0/texture = SubResource( 2 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
-} ]
-0/z_index = 0
-1/name = "32-bit_Snow_Tileset.png 1"
-1/texture = ExtResource( 8 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 0, 0, 96, 96 )
-1/tile_mode = 1
-1/autotile/bitmask_mode = 0
-1/autotile/bitmask_flags = [ Vector2( 0, 0 ), 256, Vector2( 0, 1 ), 260, Vector2( 0, 2 ), 4, Vector2( 1, 0 ), 320, Vector2( 1, 1 ), 325, Vector2( 1, 2 ), 5, Vector2( 2, 0 ), 64, Vector2( 2, 1 ), 65, Vector2( 2, 2 ), 1 ]
-1/autotile/icon_coordinate = Vector2( 1, 1 )
-1/autotile/tile_size = Vector2( 32, 32 )
-1/autotile/spacing = 0
-1/autotile/occluder_map = [  ]
-1/autotile/navpoly_map = [  ]
-1/autotile/priority_map = [  ]
-1/autotile/z_index_map = [  ]
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shapes = [  ]
-1/z_index = 0
-
-[sub_resource type="TileSet" id=4]
-0/name = "Snow Border"
-0/texture = ExtResource( 9 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 96, 0, 96, 96 )
-0/tile_mode = 1
-0/autotile/bitmask_mode = 0
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 256, Vector2( 0, 1 ), 260, Vector2( 0, 2 ), 4, Vector2( 1, 0 ), 320, Vector2( 1, 1 ), 325, Vector2( 1, 2 ), 5, Vector2( 2, 0 ), 64, Vector2( 2, 1 ), 65, Vector2( 2, 2 ), 1 ]
-0/autotile/icon_coordinate = Vector2( 1, 0 )
-0/autotile/tile_size = Vector2( 32, 32 )
-0/autotile/spacing = 0
-0/autotile/occluder_map = [  ]
-0/autotile/navpoly_map = [  ]
-0/autotile/priority_map = [  ]
-0/autotile/z_index_map = [  ]
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shapes = [  ]
-0/z_index = 0
-1/name = "Rock"
-1/texture = ExtResource( 8 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 128, 32, 32, 32 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 0, 0 )
-1/navigation_offset = Vector2( 0, 0 )
-1/shapes = [  ]
-1/z_index = 0
 
 [node name="Room" type="RigidBody2D"]
 collision_layer = 256
@@ -104,14 +10,8 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 3 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
-[node name="TileMapDetails" type="TileMap" parent="."]
-tile_set = SubResource( 4 )
-cell_size = Vector2( 32, 32 )
-format = 1
-
 [node name="Enemies" type="Node" parent="."]
+
+[node name="TileMap" type="TileMap" parent="."]
+cell_size = Vector2( 32, 32 )
+format = 1

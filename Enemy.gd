@@ -9,7 +9,7 @@ var is_idle = true
 var world
 var player
 var distance_to_player
-export var notice_distance = 300
+export var notice_distance = 400
 export var max_distance = 280 # the maximum distance the enemy wants to be
 var min_distance
 export var distance_range = 135 # will be subtracted from max distance to get min distance

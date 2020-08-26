@@ -50,7 +50,7 @@ func assign_role(enemy): # specializes the enemy
 	if type == 2: # sniper
 		enemy.projectile_count = 1
 		enemy.projectile_speed = 750
-		enemy.max_distance = 300
+		enemy.max_distance = 400
 		enemy.distance_range = 50
 		enemy.max_speed = 80
 		enemy.attack_timer_start = 1.5

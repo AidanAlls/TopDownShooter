@@ -131,7 +131,7 @@ func take_damage(amount):
 	hit_marker_instance.apply_impulse(Vector2(), Vector2(0, 100).rotated(rng.randf_range(2.4, 3.8)))
 	hit_marker_instance.setup_text(String(amount)) # should be last because queue frees
 	
-	# blink red
+	# blink red/i-frames
 	modulate = Color(1, 0, 0, 1)
 	hit_timer.stop()
 	hit_timer.wait_time = 0.35
